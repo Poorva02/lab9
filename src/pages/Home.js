@@ -2,10 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const Home = ({ notes }) => {
-  const [text, setText] = React.useState();
+  const [text, setText] = React.useState('');
 
   const handleSubmit = () => {
-    window.ws.send('test');
+    const data = {
+      type: 'SEND_MESSAGE',
+      newNote:text,
+    };
+    window.ws.send(JSON.stringify(data));
+    setText('');
   };
 
   return (
